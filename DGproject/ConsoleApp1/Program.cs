@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ConsoleApp1
@@ -36,13 +38,25 @@ namespace ConsoleApp1
                     return;
                 }
 
+                string lines = "";
+
                 using (var sr = new StreamReader(new FileStream(filePath, FileMode.Open, FileAccess.Read)))
                 {
                     var text = sr.ReadToEnd().ToLower();
                     var words = GetWords(text);
-                    string[][] lines = GetParsedLinesForCSV(words);
+                    lines = GetParsedLinesForCSV(words);
                     //доделать выход в таблицу
+                }
 
+                if (lines == "")
+                {
+                    return;
+                }
+
+                var outputPath = Path.Combine(Directory.GetCurrentDirectory(), "wordsTable.csv");
+                using (var sw = new StreamWriter(new FileStream(outputPath, FileMode.OpenOrCreate, FileAccess.Write)))
+                {
+                    sw.Write(lines);
                 }
             }
             catch (Exception e)
@@ -52,30 +66,27 @@ namespace ConsoleApp1
             }
         }
 
-        private string[][] GetParsedLinesForCSV(string[] words)
+        private string GetParsedLinesForCSV(string[] words)
         {
             if (words.Length > 2)
             {
                 return GetParsedLines(words);
             }
 
-            return new[] { new[] { words[0], "1", "100%" } };
+            return $"{words[0]}, 1, 100%";
         }
 
-        private string[][] GetParsedLines(string[] words)
+        private string GetParsedLines(string[] words)
         {
-            var lineList = new List<string[]>();
+            var lines = new StringBuilder();
             var uniqueWords = GetUniqueWords(words);
             foreach (var uniqueWord in uniqueWords)
             {
-                var line = new[] {
-                    uniqueWord.Key.ToString(),
-                    uniqueWord.Value.ToString(),
-                    (uniqueWord.Value * 100f / words.Length).ToString() };
+                string line = $"{uniqueWord.Key.ToString()}, {uniqueWord.Value.ToString()}, {(uniqueWord.Value * 100f / words.Length).ToString()}";
 
-                lineList.Add(line);
+                lines.AppendLine(line);
             }
-            return lineList.ToArray();
+            return lines.ToString();
         }
 
         private static Dictionary<string, int> GetUniqueWords(string[] words)
@@ -83,11 +94,6 @@ namespace ConsoleApp1
             var uniqueWords = new Dictionary<string, int>();
             foreach (string word in words)
             {
-                if (word == "") //по-другому парсить надо, но пусть так для простоты
-                {
-                    continue;
-                }
-
                 //вот здесь мог бы быь сложный механизм, который бы парсил слова без окончаний
                 if (uniqueWords.ContainsKey(word))
                 {
@@ -102,11 +108,24 @@ namespace ConsoleApp1
 
         private static string[] GetWords(string text)
         {
-            var patternN = new Regex("[\n]");
-            var newText = patternN.Replace(text, " ");
-            var pattern = new Regex("[;,.!?:;\t\r]");
-            newText = pattern.Replace(newText, "");
-            return newText.Split(' ');
+            var stringBuilder = new StringBuilder();
+
+            foreach (var t in text)
+            {
+                if ((t == '\n' || t == '\r' || t == '\t')
+                    && stringBuilder.Length > 2 && !stringBuilder[stringBuilder.Length - 1].Equals(' '))
+                {
+                    stringBuilder.Append(' ');
+                }
+
+                if (Char.IsLetter(t) || Char.IsDigit(t) // вероятно нужно условие для цифр с пробелами 30 000
+                    || t.Equals(' ') || t.Equals('-'))
+                {
+                    stringBuilder.Append(t);
+                }
+            }
+
+            return stringBuilder.ToString().Split(' ');
         }
 
         private string GetPath(string path)
@@ -118,12 +137,6 @@ namespace ConsoleApp1
             }
             var dir = Directory.GetCurrentDirectory();
             dir = dir.Remove(45, dir.Length - 45) + "00\\";
-
-            if (!Directory.Exists(dir))
-            {
-                Console.WriteLine("Path doesn't exist.");
-                return ""; //!!!!!!!!!!!!!
-            }
 
             return Path.Combine(dir, path + ".txt"); // !!!!!!!!!!!!!!!!!
         }

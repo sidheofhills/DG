@@ -1,0 +1,7 @@
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+D:\programming\visual_studio\source\repos\DG\DGproject\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

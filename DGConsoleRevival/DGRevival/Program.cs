@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace ConsoleApp1
+namespace DGRevival
 {
     internal class Program
     {
@@ -10,7 +10,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Enter a txt-file path \nOr a txt-file name if it's in the working directory"); //!!!!!!!!
             var checker = new WordFrequencyChecker();
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine();
 
             if (userInput == null)
             {
@@ -25,7 +25,6 @@ namespace ConsoleApp1
 
     {
         public PreparedWords Words = new();
-        private List<string> Lines = new();
 
         public void StarterMethod(string path)
         {
@@ -33,7 +32,7 @@ namespace ConsoleApp1
             {
                 var filePath = GetPath(path);
 
-                if (filePath == "")
+                if (filePath == "" || !Path.Exists(filePath))
                 {
                     return;
                 }
@@ -45,9 +44,9 @@ namespace ConsoleApp1
                         var text = sr.ReadLine()?.ToLower();
 
 
-                        if (!Words.TryFillWordsList(text))
+                        if (text == null || !Words.TryFillWordsList(text))
                         {
-                            break;
+                            continue;
                         }
 
                     }
@@ -65,7 +64,7 @@ namespace ConsoleApp1
                 {
                     foreach (string line in Words.GetParsedLinesForCsv())
                     {
-                        sw.Write(line);
+                        sw.Write(line); //почему ломается кодировка, если записывать результаты файла байконур?
                     }
 
                 }
@@ -78,19 +77,24 @@ namespace ConsoleApp1
         }
 
 
-
-
-        private string GetPath(string path)
+        private string GetPath(string filename)
         {
             // для шортката хак, но вообще здесь логика сборки пути из папки
-            if (path == " ")
-            {
-                path = "хармс";
-            }
+            filename = GetCheatFileName(filename);
             var dir = Directory.GetCurrentDirectory();
             dir = dir.Remove(45, dir.Length - 45) + "00\\";
 
-            return Path.Combine(dir, path + ".txt"); // !!!!!!!!!!!!!!!!!
+            return Path.Combine(dir, filename + ".txt"); // !!!!!!!!!!!!!!!!!
         }
+
+        private static string GetCheatFileName(string path) => path switch
+        {
+            "x" => "хармс",
+            "b" => "байконур",
+            "t" => "tool",
+            "g" => "годо",
+
+            _ => path
+        };
     }
 }

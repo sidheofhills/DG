@@ -1,0 +1,15 @@
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.exe
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.dll.config
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.deps.json
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.runtimeconfig.json
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.dll
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\bin\Debug\net7.0\DGRevival.pdb
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.GeneratedMSBuildEditorConfig.editorconfig
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.AssemblyInfoInputs.cache
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.AssemblyInfo.cs
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.csproj.CoreCompileInputs.cache
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.dll
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\refint\DGRevival.dll
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.pdb
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\DGRevival.genruntimeconfig.cache
+D:\programming\visual_studio\source\repos\DG\DGConsoleRevival\DGRevival\obj\Debug\net7.0\ref\DGRevival.dll
